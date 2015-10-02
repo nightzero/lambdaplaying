@@ -2,6 +2,8 @@ import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+import org.junit.Assert;
+
 
 public class LambdaPlaying {
 	
@@ -40,9 +42,19 @@ public class LambdaPlaying {
 	public void testMyFunctionalInterface(MyFunctionalInterface k){
 		k.myFunc("Hej");
 	}
+	
+	public void testOptional(){
+		Optional<String> a = Optional.of("a");
+		Assert.assertTrue(a.isPresent());
+		System.out.println(a.get());
+		Optional<String> b = Optional.empty();
+		System.out.println(b.orElse("c"));
+		Optional<String> c = Optional.empty();
+		System.out.println(b.orElseGet(()-> "d"));
+	}
 
 	public static void main(String[] args) {
 		LambdaPlaying play = new LambdaPlaying();
-		play.testSupplier();
+		play.testOptional();
 	}
 }
