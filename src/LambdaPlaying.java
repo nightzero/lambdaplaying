@@ -1,5 +1,8 @@
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.Assert;
@@ -53,8 +56,18 @@ public class LambdaPlaying {
 		System.out.println(b.orElseGet(()-> "d"));
 	}
 
+	public void testPartition(){
+		Stream<String> strings = Stream.of("Aqwe", "qwe", "Aasd", "asd");
+		Map<Boolean, List<String>> result = strings.collect(Collectors.partitioningBy(s -> s.startsWith("A")));
+		List<String> trueList = result.get(new Boolean(true));
+		List<String> falseList = result.get(new Boolean(false));
+		trueList.forEach((v) -> System.out.println(v));
+		System.out.println("----------------");
+		falseList.forEach((v) -> System.out.println(v));
+	}
+	
 	public static void main(String[] args) {
 		LambdaPlaying play = new LambdaPlaying();
-		play.testOptional();
+		play.testPartition();
 	}
 }
